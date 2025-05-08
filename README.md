@@ -29,7 +29,7 @@ Before you begin, ensure you have the following installed and configured:
 How does "Hello, World!" make it from the `terraform.tfvars` to a VAI Pipeline and back?
 ```mermaid
 flowchart
-    A["tfvars"] -- "base_message_for_pipeline" --> B["main.tf"]
+    A["terraform.tfvars"] -- "base_message_for_pipeline" --> B["main.tf"]
     B -- arg: message_from_tf --> C["terraform_helper.py"]
     C -- param: message_to_produce --> D["hello_pipeline.py"]
     D -- arg: input_text --> E["components.py"]
