@@ -36,8 +36,9 @@ flowchart
     E -- Returns modified msg --> D
     D -- Result (modified msg) --> C
     C -- "Writes pipeline_output.json" --> B
-    B -- Displays final msg --> F["CLI: terraform apply"]
+    B -- Parse json msg --> F["CLI: terraform apply"]
     F -- Begin the application --> A
+    F -- Output message --> G["Hello, World\!"]
 ```
 
 ## Project Structure
