@@ -46,6 +46,7 @@ resource "google_project_service" "project_apis" {
     "logging.googleapis.com",
     "iam.googleapis.com"
   ])
+
   project            = var.project_id
   service            = each.key 
   disable_on_destroy = false
@@ -57,23 +58,27 @@ resource "random_id" "unique_suffix" {
 
 resource "google_storage_bucket" "pipeline_root_bucket" {
   project = var.project_id
-  name    = "kfp-root-${var.project_id}-${random_id.unique_suffix.hex}" # Line 60
+  name    = "kfp-root-${var.project_id}-${random_id.unique_suffix.hex}" 
   location                    = var.region
+
   uniform_bucket_level_access = true
   force_destroy               = true
+  
   depends_on = [google_project_service.project_apis]
 }
 
-resource "null_resource" "run_vertex_ai_pipeline_via_script" { # Line 70
+resource "null_resource" "run_vertex_ai_pipeline_via_script" { 
   triggers = {
     run_id                       = random_id.unique_suffix.hex
     gcp_project_id               = var.project_id
     gcp_region                   = var.region
+
     pipeline_gcs_root_path       = google_storage_bucket.pipeline_root_bucket.url
     input_message_for_kfp        = var.base_message_for_pipeline
+
     helper_script_content_hash   = filebase64sha256("${path.module}/terraform_helper.py")
     kfp_components_py_hash       = filesha256("${path.module}/pipeline/components.py")
-    kfp_pipeline_py_hash         = filesha256("${path.module}/pipeline/hello_pipeline.py") # Line 80
+    kfp_pipeline_py_hash         = filesha256("${path.module}/pipeline/hello_pipeline.py") 
   }
 
   provisioner "local-exec" {
@@ -105,11 +110,6 @@ data "local_file" "pipeline_run_result" {
 output "vertex_ai_pipeline_output_message" {
   description = "Message from KFP component via helper script."
   value       = try(jsondecode(data.local_file.pipeline_run_result.content).message, "Error: Could not retrieve message.")
-}
-
-output "pipeline_artifacts_gcs_bucket" {
-  description = "GCS bucket for Vertex AI pipeline artifacts."
-  value       = google_storage_bucket.pipeline_root_bucket.url
 }
 
 resource "null_resource" "goodbye_message_on_destroy" { 
