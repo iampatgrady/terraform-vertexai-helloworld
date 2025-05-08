@@ -7,9 +7,8 @@ from .components import produce_message_component
     description="A minimal Vertex AI pipeline that produces a Hello World message, orchestrated by Terraform."
 )
 def minimal_hello_pipeline(
-    # This is a pipeline parameter that can be set when the pipeline is run.
     # Terraform will pass a value for this.
-    message_to_produce: str = "Hello, KFP World (default)!"
+    message_to_produce: str 
 ):
     """
     Defines the Hello World KFP pipeline structure.

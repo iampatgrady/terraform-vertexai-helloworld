@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-# target120/terraform_helper.py (Corrected)
+# ./terraform_helper.py 
 
 import argparse
 import json
@@ -7,17 +6,15 @@ import os
 import sys
 import tempfile
 import traceback
-import logging # For better script logging
+import logging 
 
-# Ensure the pipeline package can be imported
 sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 
 from pipeline.hello_pipeline import minimal_hello_pipeline
 from kfp import compiler
 from google.cloud import aiplatform
-from google.cloud.aiplatform.compat.types import pipeline_state as ps_module # Renamed to avoid confusion
+from google.cloud.aiplatform.compat.types import pipeline_state as ps_module 
 
-# Configure basic logging for this helper script
 logging.basicConfig(stream=sys.stderr, level=logging.INFO, format='Helper: %(levelname)s: %(message)s')
 
 def run_vertex_ai_pipeline(
@@ -81,7 +78,6 @@ def run_vertex_ai_pipeline(
                 logging.error(err_msg)
                 result_data = {"error": err_msg}
         else:
-            # job.state is an enum instance, so job.state.name gives its string name
             job_state_name = job.state.name if job.state else 'UNKNOWN_PIPELINE_STATE'
             error_summary = f"Pipeline job '{pipeline_job_id}' did not succeed. Final State: {job_state_name}."
             try:

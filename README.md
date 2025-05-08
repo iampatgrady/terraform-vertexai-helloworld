@@ -25,6 +25,21 @@ Before you begin, ensure you have the following installed and configured:
 4.  **Git:** For cloning this repository.
 5.  **(Optional but Recommended) A Google Cloud Project:** With billing enabled. You can use the Google Cloud Free Tier and sign-up credits. You will need Admin access or sufficient permissions to enable APIs and create resources (Vertex AI, Cloud Storage, IAM).
 
+## Variable Flow
+How does "Hello, World!" make it from the `terraform.tfvars` to a VAI Pipeline and back?
+```mermaid
+flowchart
+    A["tfvars"] -- "base_message_for_pipeline" --> B["main.tf"]
+    B -- arg: message_from_tf --> C["terraform_helper.py"]
+    C -- param: message_to_produce --> D["hello_pipeline.py"]
+    D -- arg: input_text --> E["components.py"]
+    E -- Returns modified msg --> D
+    D -- Result (modified msg) --> C
+    C -- "Writes pipeline_output.json" --> B
+    B -- Displays final msg --> F["CLI: terraform apply"]
+    F -- Begin the application --> A
+```
+
 ## Project Structure
 ```
 ./
@@ -127,4 +142,5 @@ Check out the blog post for a detailed walkthrough and stay tuned for Part 2 of 
 ---
 
 *Inspired by and on the backs of Carlos Timoteo, Nick Feller, Tyrone Schiff, and Anže Kravanja.*
+
 
