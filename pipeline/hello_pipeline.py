@@ -1,0 +1,22 @@
+# tfhw3_target120/pipeline/hello_pipeline.py
+from kfp import dsl
+from .components import produce_message_component
+
+@dsl.pipeline(
+    name="minimal-hello-world-pipeline-tfhw3",
+    description="A minimal Vertex AI pipeline that produces a Hello World message, orchestrated by Terraform."
+)
+def minimal_hello_pipeline(
+    # This is a pipeline parameter that can be set when the pipeline is run.
+    # Terraform will pass a value for this.
+    message_to_produce: str = "Hello, KFP World (default)!"
+):
+    """
+    Defines the Hello World KFP pipeline structure.
+    It consists of a single component that processes an input message.
+    """
+    # Call the component, passing the pipeline parameter to its input.
+    producer_task = produce_message_component(
+        input_text=message_to_produce
+    )
+    # In more complex pipelines, you would chain multiple components here.

@@ -1,0 +1,5 @@
+# tfhw3_target120/requirements.txt
+kfp>=2.0.0,<3.0.0               # For Kubeflow Pipelines SDK
+google-cloud-aiplatform>=1.91.0 # For Vertex AI SDK
+google-cloud-logging            # Added for component logging example
+PyYAML>=6.0                     # KFP dependency, often good to specify

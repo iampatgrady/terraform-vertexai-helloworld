@@ -1,0 +1,71 @@
+# Terraform
+**/.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
+.terraform.lock.hcl
+
+# Python
+**/__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+dist/
+build/
+*.spec
+*.log
+*.coverage
+*.cache
+*.pytest_cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+VENV/
+lib/
+lib64/
+include/
+Scripts/
+pyvenv.cfg
+pip-selfcheck.json
+
+# OS-generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE / Editor specific
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+
+# Generated files from this project
+tfhw3_pipeline_output.json
+pipeline_output.json # If you used this name in earlier versions
+
+# Secrets (even if not used now, good practice)
+# secrets.tfvars
+# *.pem
+# *.key
