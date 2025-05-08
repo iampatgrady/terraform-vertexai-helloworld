@@ -57,7 +57,7 @@ resource "random_id" "unique_suffix" {
 
 resource "google_storage_bucket" "pipeline_root_bucket" {
   project = var.project_id
-  name    = "tfhw3-kfp-root-${var.project_id}-${random_id.unique_suffix.hex}" # Line 60
+  name    = "kfp-root-${var.project_id}-${random_id.unique_suffix.hex}" # Line 60
   location                    = var.region
   uniform_bucket_level_access = true
   force_destroy               = true
@@ -84,20 +84,20 @@ resource "null_resource" "run_vertex_ai_pipeline_via_script" { # Line 70
         --pipeline_root_gcs "${self.triggers.pipeline_gcs_root_path}" \
         --job_id_suffix "${self.triggers.run_id}" \
         --message_from_tf "${self.triggers.input_message_for_kfp}" \
-        --output_file "${path.module}/tfhw3_pipeline_output.json" # Line 90
+        --output_file "${path.module}/pipeline_output.json" # Line 90
     EOT
   }
 
   provisioner "local-exec" {
     when    = destroy
-    command = "rm -f \"${path.module}/tfhw3_pipeline_output.json\""
+    command = "rm -f \"${path.module}/pipeline_output.json\""
   }
 
   depends_on = [google_storage_bucket.pipeline_root_bucket]
 }
 
 data "local_file" "pipeline_run_result" {
-  filename = "${path.module}/tfhw3_pipeline_output.json"
+  filename = "${path.module}/pipeline_output.json"
 
   depends_on = [null_resource.run_vertex_ai_pipeline_via_script]
 } 

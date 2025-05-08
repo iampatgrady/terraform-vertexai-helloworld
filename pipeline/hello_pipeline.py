@@ -1,9 +1,9 @@
-# tfhw3_target120/pipeline/hello_pipeline.py
+# ./pipeline/hello_pipeline.py
 from kfp import dsl
 from .components import produce_message_component
 
 @dsl.pipeline(
-    name="minimal-hello-world-pipeline-tfhw3",
+    name="minimal-hello-world-pipeline",
     description="A minimal Vertex AI pipeline that produces a Hello World message, orchestrated by Terraform."
 )
 def minimal_hello_pipeline(

@@ -27,8 +27,7 @@ Before you begin, ensure you have the following installed and configured:
 
 ## Project Structure
 ```
-└── ./
-└── tfhw3
+./
 ├── pipeline
 │ ├── init.py
 │ ├── components.py
@@ -92,15 +91,15 @@ Before you begin, ensure you have the following installed and configured:
     ```
     Outputs:
 
-    pipeline_artifacts_gcs_bucket = "gs://tfhw3-kfp-root-your-project-id-xxxxxxxx"
-    vertex_ai_pipeline_output_message = "Hello from Terraform to KFP (Example #3)! - from KFP component (tfhw3)"
+    pipeline_artifacts_gcs_bucket = "gs://kfp-root-your-project-id-xxxxxxxx"
+    vertex_ai_pipeline_output_message = "Hello from Terraform to KFP (Example #3)! - from KFP component"
     ```
     The "Hello, World!" (or your custom message) comes from Vertex AI Pipelines!
 
 3.  **View in Google Cloud Console (Optional):**
     *   Navigate to [Vertex AI > Pipelines](https://console.cloud.google.com/vertex-ai/pipelines) in the Google Cloud Console.
     *   Select your project and region.
-    *   You should see a pipeline run named similar to `TFHW3 KFP Run - xxxxxxxx`. Click on it to see the graph and component details.
+    *   You should see a pipeline run named similar to `KFP Run - xxxxxxxx`. Click on it to see the graph and component details.
 
 ## Cleaning Up
 

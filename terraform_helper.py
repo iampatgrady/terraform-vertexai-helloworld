@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# tfhw3_target120/terraform_helper.py (Corrected)
+# target120/terraform_helper.py (Corrected)
 
 import argparse
 import json
@@ -47,11 +47,11 @@ def run_vertex_ai_pipeline(
             package_path=compiled_pipeline_path
         )
 
-        pipeline_job_id = f"tfhw3-kfp-{job_id_suffix.lower().replace('_', '-')}"[:120]
+        pipeline_job_id = f"kfp-{job_id_suffix.lower().replace('_', '-')}"[:120]
 
         logging.info(f"Submitting Vertex AI Pipeline Job '{pipeline_job_id}'.")
         job = aiplatform.PipelineJob(
-            display_name=f"TFHW3 KFP Run - {job_id_suffix.lower()}"[:120],
+            display_name=f"KFP Run - {job_id_suffix.lower()}"[:120],
             template_path=compiled_pipeline_path,
             pipeline_root=pipeline_root_gcs,
             job_id=pipeline_job_id,
