@@ -138,7 +138,7 @@ Type `yes` when prompted. This will delete the GCS bucket and any other associat
 
 Check out the blog post for a detailed walkthrough and stay tuned for Part 2 of the series\!
 
-*(Link to your blog post when it's live)*
+[https://medium.com/@pat.grady/marketing-to-machine-learning-d1d79932c0a0](https://medium.com/@pat.grady/marketing-to-machine-learning-d1d79932c0a0)
 
 ---
 
